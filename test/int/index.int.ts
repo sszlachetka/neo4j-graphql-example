@@ -1,7 +1,5 @@
 import { newServer } from '../../src/newServer';
-
-const test = require('ava');
-
+import test from 'ava';
 import { ApolloServer } from 'apollo-server';
 
 import {
@@ -10,10 +8,9 @@ import {
   CREATE_BOOKS_MUTATION,
 } from '../data/createBooks';
 
-test('createBooks', async (t: any) => {
+test('createBooks', async (t) => {
   const server: ApolloServer = await newServer();
 
-  console.log('starting...');
   let result: any;
   try {
     result = await server.executeOperation({
@@ -27,7 +24,6 @@ test('createBooks', async (t: any) => {
   t.true(!result.errors);
 
   t.deepEqual(
-    // @ts-ignore
     result.data.createBooks,
     CREATE_BOOKS_OUTPUT
   );
