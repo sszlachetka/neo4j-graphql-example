@@ -1,5 +1,5 @@
 ```
-node index.js
+npm run dev
 ```
 
 Navigate to [http://localhost:4000](http://localhost:4000)
@@ -9,3 +9,4 @@ Navigate to [http://localhost:4000](http://localhost:4000)
 Quick-start: https://neo4j.com/developer/graphql/
 Neo4j GraphQL Library features: https://neo4j.com/product/graphql-library/
 Neo4j GraphQL Library docs: https://neo4j.com/docs/graphql-manual/current/
+https://neo4j.com/developer-blog/create-a-typescript-apollo-server-and-live-database-with-unit-tests/
