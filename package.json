@@ -1,0 +1,27 @@
+{
+  "name": "neo4j-graphql-example",
+  "version": "1.0.0",
+  "description": "Quickstart: https://neo4j.com/developer/graphql/ Neo4j GraphQL Library features: https://neo4j.com/product/graphql-library/ Neo4j GraphQL Library docs: https://neo4j.com/docs/graphql-manual/current/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sszlachetka/neo4j-graphql-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sszlachetka/neo4j-graphql-example/issues"
+  },
+  "homepage": "https://github.com/sszlachetka/neo4j-graphql-example#readme",
+  "dependencies": {
+    "@neo4j/graphql": "~3.7.0",
+    "apollo-server": "~3.10.2",
+    "dotenv": "~16.0.2",
+    "graphql": "~16.6.0",
+    "neo4j-driver": "~5.0.0"
+  }
+}
