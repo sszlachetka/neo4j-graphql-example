@@ -13,5 +13,5 @@ https://neo4j.com/developer-blog/create-a-typescript-apollo-server-and-live-data
 https://www.apollographql.com/docs/apollo-server/testing/testing/
 
 ## TODO
-1. install neo4j typings
-2. use imports only instead of require
+1. Why import hints doesn't work in test/
+2. Use absolute import paths?

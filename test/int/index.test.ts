@@ -1,6 +1,7 @@
-import {describe, expect, test, beforeAll, afterAll} from '@jest/globals';
-import { createNeo4jDriver, createServer } from '../../src/createServer';
+import { describe, expect, test, beforeAll, afterAll } from '@jest/globals';
 import { ApolloServer } from 'apollo-server';
+import createDriver from '../../src/createDriver';
+import createServer from '../../src/createServer';
 
 import {
   CREATE_BOOKS_OUTPUT,
@@ -8,13 +9,12 @@ import {
   CREATE_BOOKS_MUTATION,
 } from '../data/createBooks';
 
-
 describe('createBooks', () => {
   let server: ApolloServer;
   let driver: any;
 
   beforeAll(async () => {
-    driver = createNeo4jDriver();
+    driver = createDriver();
     server = await createServer(driver);
   });
 

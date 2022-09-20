@@ -1,6 +1,7 @@
-import { createNeo4jDriver, createServer } from './createServer';
+import createDriver from './createDriver';
+import createServer from './createServer';
 
-createServer(createNeo4jDriver()).then((server) => {
+createServer(createDriver()).then((server) => {
   server.listen().then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`);
   });
