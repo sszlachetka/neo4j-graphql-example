@@ -1,5 +1,6 @@
 import { describe, expect, test, beforeAll, afterAll } from '@jest/globals';
 import { ApolloServer } from 'apollo-server';
+import { Driver } from 'neo4j-driver';
 import createDriver from '../../src/createDriver';
 import createServer from '../../src/createServer';
 
@@ -11,7 +12,7 @@ import {
 
 describe('createBooks', () => {
   let server: ApolloServer;
-  let driver: any;
+  let driver: Driver;
 
   beforeAll(async () => {
     driver = createDriver();
@@ -24,17 +25,12 @@ describe('createBooks', () => {
   });
 
   test('createBooks', async () => {
-    let result: any;
-    try {
-      result = await server.executeOperation({
-        query: CREATE_BOOKS_MUTATION,
-        variables: CREATE_BOOKS_PARAMS,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const result = await server.executeOperation({
+      query: CREATE_BOOKS_MUTATION,
+      variables: CREATE_BOOKS_PARAMS,
+    });
 
     expect(result.errors).toBeUndefined();
-    expect(result.data.createBooks).toEqual(CREATE_BOOKS_OUTPUT);
+    expect(result.data?.createBooks).toEqual(CREATE_BOOKS_OUTPUT);
   });
 });

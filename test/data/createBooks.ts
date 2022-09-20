@@ -9,28 +9,21 @@ mutation($createBooksInput: [BookCreateInput!]!) {
 }
 `;
 
+const BOOKS = [
+  {
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+  },
+  {
+    title: 'Beloved',
+    author: 'Toni Morrison',
+  },
+];
+
 export const CREATE_BOOKS_PARAMS = {
-  createBooksInput: [
-    {
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
-    },
-    {
-      title: 'Beloved',
-      author: 'Toni Morrison',
-    },
-  ],
+  createBooksInput: BOOKS,
 };
 
 export const CREATE_BOOKS_OUTPUT = {
-  books: [
-    {
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
-    },
-    {
-      title: 'Beloved',
-      author: 'Toni Morrison',
-    },
-  ],
+  books: BOOKS,
 };
