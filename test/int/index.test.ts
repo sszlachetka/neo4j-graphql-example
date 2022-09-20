@@ -4,12 +4,6 @@ import { Driver } from 'neo4j-driver';
 import createDriver from '../../src/createDriver';
 import createServer from '../../src/createServer';
 
-import {
-  CREATE_BOOKS_OUTPUT,
-  CREATE_BOOKS_PARAMS,
-  CREATE_BOOKS_MUTATION,
-} from '../data/createBooks';
-
 describe('createBooks', () => {
   let server: ApolloServer;
   let driver: Driver;
@@ -24,13 +18,32 @@ describe('createBooks', () => {
     await server?.stop();
   });
 
+  const BOOKS = [
+    {
+      title: 'The Great Gatsby',
+      author: 'F. Scott Fitzgerald',
+    },
+    {
+      title: 'Beloved',
+      author: 'Toni Morrison',
+    },
+  ];
+
   test('createBooks', async () => {
     const result = await server.executeOperation({
-      query: CREATE_BOOKS_MUTATION,
-      variables: CREATE_BOOKS_PARAMS,
+      query: `
+      mutation($createBooksInput: [BookCreateInput!]!) {
+        createBooks(input: $createBooksInput) {
+          books {
+            title,
+            author
+          }
+        }
+      }`,
+      variables: { createBooksInput: BOOKS },
     });
 
     expect(result.errors).toBeUndefined();
-    expect(result.data?.createBooks).toEqual(CREATE_BOOKS_OUTPUT);
+    expect(result.data?.createBooks).toEqual({ books: BOOKS });
   });
 });
