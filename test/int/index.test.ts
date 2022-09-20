@@ -1,5 +1,5 @@
 import {describe, expect, test, beforeAll, afterAll} from '@jest/globals';
-import { createNeo4jDriver, createServer } from '../../src/newServer';
+import { createNeo4jDriver, createServer } from '../../src/createServer';
 import { ApolloServer } from 'apollo-server';
 
 import {

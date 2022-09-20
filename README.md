@@ -11,3 +11,7 @@ Neo4j GraphQL Library features: https://neo4j.com/product/graphql-library/
 Neo4j GraphQL Library docs: https://neo4j.com/docs/graphql-manual/current/
 https://neo4j.com/developer-blog/create-a-typescript-apollo-server-and-live-database-with-unit-tests/
 https://www.apollographql.com/docs/apollo-server/testing/testing/
+
+## TODO
+1. install neo4j typings
+2. use imports only instead of require
