@@ -11,14 +11,15 @@ const typeDefs = gql`
   }
 `;
 
-const driver = neo4j.driver(
-  process.env.NEO4J_URI,
-  neo4j.auth.basic(process.env.NEO4J_USER, process.env.NEO4J_PASSWORD)
-);
+export function createNeo4jDriver() {
+  return neo4j.driver(
+    process.env.NEO4J_URI,
+    neo4j.auth.basic(process.env.NEO4J_USER, process.env.NEO4J_PASSWORD)
+  );
+}
 
-const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
-
-export async function newServer(): Promise<ApolloServer> {
+export async function createServer(driver: any): Promise<ApolloServer> {
+  const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
   const schema = await neoSchema.getSchema();
 
   return new ApolloServer({ schema });
