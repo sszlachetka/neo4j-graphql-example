@@ -399,6 +399,7 @@ Quick-start: https://neo4j.com/developer/graphql/
 Neo4j GraphQL Library features: https://neo4j.com/product/graphql-library/
 https://neo4j.com/developer-blog/create-a-typescript-apollo-server-and-live-database-with-unit-tests/
 https://www.apollographql.com/docs/apollo-server/testing/testing/
+https://neo4j.com/graphacademy/training-graphql-apis/00-graphql-apis-about-this-course/
 
 
 ## TODO

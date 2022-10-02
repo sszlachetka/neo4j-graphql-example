@@ -1,10 +1,10 @@
 import { describe, expect, test, beforeAll, afterAll } from '@jest/globals';
 import { ApolloServer } from 'apollo-server';
 import { Driver } from 'neo4j-driver';
-import createDriver from '../../src/createDriver';
-import createServer from '../../src/createServer';
+import { createDriver } from '../../src/neo4j';
+import { createServer } from '../../src/gql';
 
-describe('createBooks', () => {
+describe('createPeople', () => {
   let server: ApolloServer;
   let driver: Driver;
 
@@ -18,32 +18,33 @@ describe('createBooks', () => {
     await server?.stop();
   });
 
-  const BOOKS = [
+  const timestamp = new Date().toISOString();
+  const PEOPLE = [
     {
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
+      name: `Integration Test Person 1 - ${timestamp}`,
+      born: 1999,
     },
     {
-      title: 'Beloved',
-      author: 'Toni Morrison',
+      name: `Integration Test Person 2 - ${timestamp}`,
+      born: 2007,
     },
   ];
 
-  test('createBooks', async () => {
+  test('People are created', async () => {
     const result = await server.executeOperation({
       query: `
-      mutation($createBooksInput: [BookCreateInput!]!) {
-        createBooks(input: $createBooksInput) {
-          books {
-            title,
-            author
+      mutation CreatePeople($input: [PersonCreateInput!]!) {
+        createPeople(input: $input) {
+          people {
+            name
+            born
           }
         }
       }`,
-      variables: { createBooksInput: BOOKS },
+      variables: { input: PEOPLE },
     });
 
     expect(result.errors).toBeUndefined();
-    expect(result.data?.createBooks).toEqual({ books: BOOKS });
+    expect(result.data?.createPeople).toEqual({ people: PEOPLE });
   });
 });
