@@ -71,7 +71,7 @@ By supplying the [Neo4j GraphQL Library]( https://neo4j.com/docs/graphql-manual/
 
 ### Type definitions
 
-[typeDefs.ts](src/typeDefs.ts)
+[gql](src/gql)
 
 ### Queries
 
@@ -379,14 +379,29 @@ People query variables
 
 ### Custom resolvers
 
+```
+  type Person {
+    name: String!
+    born: Int
+    age: Int @computed(from: ["born"])
+    actedInMovies: [Movie!]!
+      @relationship(type: "ACTED_IN", properties: "ActedIn", direction: OUT)
+    directedMovies: [Movie!]! @relationship(type: "DIRECTED", direction: OUT)
+  }
+```
+
 `@computed` field directive
 1. Requires custom resolver
 1. The field can be included in a set of fields returned by a query
 1. The field cannot be used to filter nor to sort the data
 
-[typeDefs.ts](src/typeDefs.ts)
+[Person.ts](src/gql/Person.ts)
 
 ### Auth & OGM
+
+```
+extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
+```
 
 Rated movies
 ```
