@@ -386,8 +386,25 @@ People query variables
 
 [typeDefs.ts](src/typeDefs.ts)
 
-- OGM
-- Auth?
+### Auth & OGM
+
+Rated movies
+```
+query Query {
+  users {
+    id
+    email
+    ratedMoviesConnection {
+      edges {
+        rating
+        node {
+          title
+        }
+      }
+    }
+  }
+}
+```
 
 ## Run the API
 ```

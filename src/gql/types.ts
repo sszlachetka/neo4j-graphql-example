@@ -1,7 +1,9 @@
 import { OGM } from '@neo4j/graphql-ogm';
-import { Driver } from 'neo4j-driver';
+import { JWTPayload } from '../security/JWT';
 
 export type ServerContext = {
   ogm: OGM;
-  driver: Driver;
+  auth: {
+    jwt: JWTPayload
+  }
 };
