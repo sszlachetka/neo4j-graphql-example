@@ -8,16 +8,17 @@ import * as Person from './Person';
 import * as User from './User';
 import * as config from '../config';
 import { Driver } from 'neo4j-driver';
+import { ServerContext } from './types';
 
-export const typeDefs = [
+const typeDefs = [
   ActedIn.typeDefs,
   Movie.typeDefs,
   Person.typeDefs,
   User.typeDefs,
 ];
 
-export const resolvers = {
-  ...Person.resolvers,
+const resolvers = {
+  ...Person.resolvers, ...User.resolvers
 };
 
 export async function createServer(driver: Driver): Promise<ApolloServer> {
@@ -38,10 +39,11 @@ export async function createServer(driver: Driver): Promise<ApolloServer> {
   });
 
   const schema = await neoSchema.getSchema();
+  const serverContext: ServerContext = { ogm, driver };
 
   const server: ApolloServer = new ApolloServer({
     schema,
-    context: () => ({ ogm, driver }),
+    context: () => serverContext,
   });
 
   return server;
