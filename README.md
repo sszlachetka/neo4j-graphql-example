@@ -33,7 +33,7 @@ Update & Delete statements (not included in Movies Sandbox)
 Generate test data
 ```
 create (p:Person {name: 'Jan Kowalski'})
-create (m:Movie {title: 'Chlopaki nie placza'})
+create (m:Movie {title: 'Chłopaki nie płaczą'})
 create (p)-[w:WATCHED]->(m)
 return type(w)
 ```
@@ -47,7 +47,7 @@ return p
 
 Delete
 ```
-match (p:Person {name: 'Jan Kowalski'}), (m:Movie {title: 'Chlopaki nie placza'})
+match (p:Person {name: 'Jan Kowalski'}), (m:Movie {title: 'Chłopaki nie płaczą'})
 detach delete p, m
 ```
 
@@ -69,11 +69,11 @@ Apollo Server is an open-source, spec-compliant GraphQL server that's compatible
 
 By supplying the [Neo4j GraphQL Library]( https://neo4j.com/docs/graphql-manual/current) with a set of type definitions describing the shape of your graph data, it can generate an entire executable schema with all of the additional types needed to execute queries and mutations to interact with your Neo4j database.
 
-#### Type definitions
+### Type definitions
 
 [typeDefs.ts](src/typeDefs.ts)
 
-#### Queries
+### Queries
 
 ```
 query Query {
@@ -94,9 +94,9 @@ query Query {
   }
 }
 ```
-#### Mutations
+### Mutations
 
-##### Create
+#### Create
 
 ```
 mutation CreateMovies($input: [MovieCreateInput!]!) {
@@ -151,7 +151,7 @@ Variables
 }
 ```
 
-##### Update
+#### Update
 
 ```
 mutation UpdateMovies($where: MovieWhere, $update: MovieUpdateInput) {
@@ -200,7 +200,7 @@ Variables
 }
 ```
 
-#### Filtering
+### Filtering
 
 ```
 query Movies($where: MovieWhere) {
@@ -235,7 +235,7 @@ Variables
 }
 ```
 
-#### Sorting
+### Sorting
 ```
 query Movies($options: MovieOptions, $actorsOptions: PersonOptions) {
   movies(options: $options) {
@@ -270,7 +270,7 @@ Variables
 }
 ```
 
-#### Offset-based pagination
+### Offset-based pagination
 ```
 query People($options: PersonOptions) {
   people(options: $options) {
@@ -295,7 +295,7 @@ Variables
 }
 ```
 
-#### Cursor-based pagination
+### Cursor-based pagination
 
 [Explaining GraphQL Connections](https://www.apollographql.com/blog/graphql/explaining-graphql-connections/)
 
@@ -377,9 +377,16 @@ People query variables
 }
 ```
 
+### Custom resolvers
+
+`@computed` field directive
+1. Requires custom resolver
+1. The field can be included in a set of fields returned by a query
+1. The field cannot be used to filter nor to sort the data
+
+[typeDefs.ts](src/typeDefs.ts)
 
 - OGM
-- Custom resolvers
 - Auth?
 
 ## Run the API
