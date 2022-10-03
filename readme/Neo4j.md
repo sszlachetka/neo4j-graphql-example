@@ -17,12 +17,12 @@ Vocabulary:
 
 [Node or relationship properties](https://neo4j.com/docs/getting-started/current/cypher-intro/#cypher-properties)
 
+### Patterns in Cypher 
 > Sally likes Graphs
 ```
 (p:Person {name: "Sally"})-[rel:LIKES]->(g:Technology {type: "Graphs"})
 ```
-
-[source](https://neo4j.com/docs/getting-started/current/)
+[Pattern in details](https://neo4j.com/docs/getting-started/current/get-started-with-neo4j/graph-database/#property-graph)
 
 ## Examples
 
