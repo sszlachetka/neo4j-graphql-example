@@ -51,6 +51,7 @@ match (p:Person {name: 'Jan Kowalski'}), (m:Movie {title: 'Chłopaki nie płacz�
 detach delete p, m
 ```
 
+## Useful links
 [Neo4j AuraDB](https://neo4j.com/cloud/aura-free/)
 
 [Example Datasets](https://neo4j.com/developer/example-data/)
