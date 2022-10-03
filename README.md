@@ -41,7 +41,8 @@
 1. [GraphQL](readme/GraphQL.md)
 1. [Neo4j GraphQL Library](readme/Neo4jGraphQL/)
 
-## Useful links
-[Neo4j GraphQL Quickstart](https://neo4j.com/developer/graphql/)
+## Useful
 
-[Neo4j GraphQL Examples](https://github.com/neo4j/graphql/tree/master/examples)
+1. [Neo4j GraphQL quick start](https://neo4j.com/developer/graphql/)
+1. [Neo4j GraphQL examples](https://github.com/neo4j/graphql/tree/master/examples)
+1. Clean database statement `match (n) detach delete n`

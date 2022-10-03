@@ -1,19 +1,37 @@
 # Auth & OGM
 
-## Configure `Neo4jGraphQLAuthJWTPlugin`
-```
-  const neoSchema = new Neo4jGraphQL({
-    typeDefs,
-    resolvers,
-    plugins: {
-      auth: new Neo4jGraphQLAuthJWTPlugin({
-        secret: config.NEO4J_GRAPHQL_JWT_SECRET,
-      }),
-    },
-  });
-```
+## Restricting access to specific entities & fields
 
-## Sign up mutation
+1. Configure `Neo4jGraphQLAuthJWTPlugin`
+
+    ```
+      const neoSchema = new Neo4jGraphQL({
+        typeDefs,
+        resolvers,
+        plugins: {
+          auth: new Neo4jGraphQLAuthJWTPlugin({
+            secret: config.NEO4J_GRAPHQL_JWT_SECRET,
+          }),
+        },
+      });
+    ```
+
+1. Exclude specific entity operations with `@exclude` directive
+
+1. Define authorization rules for entities and fields. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
+    ```
+    extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
+    ```
+
+    Other types of authorization rules can be found [here](https://neo4j.com/docs/graphql-manual/current/auth/authorization/)
+
+    `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function, See more details in [rateMovie.ts](src/gql/User/rateMovie.ts).
+
+## Walk through User's [type definition](../../src/gql/User/index.ts).
+
+## Custom mutations with OGM
+
+### Sign up mutation
 ```
 mutation SignUp($email: String!, $password: String!) {
   signUp(email: $email, password: $password)
@@ -27,7 +45,7 @@ Variables
 }
 ```
 
-## Sign in mutation
+### Sign in mutation
 ```
 mutation SignIn($email: String!, $password: String!) {
   signIn(email: $email, password: $password)
@@ -40,17 +58,8 @@ Variables
   "password": "secret"
 }
 ```
-## Authorization rules
-Define authorization rules. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
-```
-extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
-```
 
-Other types of authorization rules can be found [here](https://neo4j.com/docs/graphql-manual/current/auth/authorization/)
-
-`@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function, See more details in [rateMovie.ts](src/gql/User/rateMovie.ts).
-
-## Rate movie mutation
+### Rate movie mutation
 ```
 mutation RateMovie($movieTitle: String!, $rating: Int!) {
   rateMovie(movieTitle: $movieTitle, rating: $rating)
@@ -64,7 +73,7 @@ Variables
 }
 ```
 
-## Rated movies query
+### Rated movies query
 ```
 query Query {
   users {
