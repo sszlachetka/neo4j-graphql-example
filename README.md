@@ -1,3 +1,39 @@
+## Quick start
+
+1. Start free Neo4j instance at [Neo4j AuraDB](https://neo4j.com/cloud/aura-free)
+    1. You can start with either empty instance or Movies example
+    1. Save generated password for later
+1. If you started with empty instance then query your data in Neo4j Browser
+    1. Run following command `:play movie-graph` to start Movie Graph built-in example. More details [here](https://neo4j.com/developer/example-data/#built-in-examples)
+    2. Move to the second step of the example and run Create data script to create the movie graph.
+1. Copy `.env.example` to `.env`. Set NEO4J_USER, NEO4J_PASSWORD and NEO4J_URI variables so that they point to you new New4j instance.
+1. Install packages & start the server
+    ```
+    npm install
+    ```
+    ```
+    npm run dev
+    ```
+1. Open [http://localhost:4000/](http://localhost:4000/) in you web browser and click `Query your server` button on Apollo Server welcome page. Run example query
+    ```
+    query Movies {
+      movies {
+        title
+        released
+        actors {
+          name
+          born
+          age
+        }
+        director {
+          name
+          born
+          age
+        }
+      }
+    }
+    ```
+
 ## Neo4j
 
 Neo4j is an open-source, NoSQL, native graph database that provides an ACID-compliant transactional backend for applications. In Neo4j, information is organized as nodes, relationships, and properties.
@@ -399,11 +435,34 @@ People query variables
 
 ### Auth & OGM
 
+Configure `Neo4jGraphQLAuthJWTPlugin`
+```
+  const neoSchema = new Neo4jGraphQL({
+    typeDefs,
+    resolvers,
+    plugins: {
+      auth: new Neo4jGraphQLAuthJWTPlugin({
+        secret: config.NEO4J_GRAPHQL_JWT_SECRET,
+      }),
+    },
+  });
+```
+
+TODO: Sign up mutation
+TODO: Sign in mutation
+
+Define authorization rules. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
 ```
 extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
 ```
 
-Rated movies
+Other types of authorization rules can be found [here](https://neo4j.com/docs/graphql-manual/current/auth/authorization/)
+
+`@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function, See more details in [rateMovie.ts](src/gql/User/rateMovie.ts).
+
+TODO: rateMovie mutation
+
+Rated movies query
 ```
 query Query {
   users {
@@ -421,19 +480,10 @@ query Query {
 }
 ```
 
-## Run the API
-```
-npm run dev
-```
-
+TODO: clean this up
 ## Useful links
 Quick-start: https://neo4j.com/developer/graphql/
 Neo4j GraphQL Library features: https://neo4j.com/product/graphql-library/
 https://neo4j.com/developer-blog/create-a-typescript-apollo-server-and-live-database-with-unit-tests/
 https://www.apollographql.com/docs/apollo-server/testing/testing/
 https://neo4j.com/graphacademy/training-graphql-apis/00-graphql-apis-about-this-course/
-
-
-## TODO
-1. Why import hints doesn't work in test/
-2. Use absolute import paths?
