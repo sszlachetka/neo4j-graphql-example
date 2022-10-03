@@ -26,11 +26,11 @@ Vocabulary:
 
 ## Examples
 
-[Movies Sandbox](https://neo4j.com/sandbox/)
+[Movies Sandbox](https://neo4j.com/sandbox/) (Describe basic components of Neo4j Browser)
 
-Update & Delete statements (not included in Movies Sandbox)
+### Update & Delete statements (not included in Movies Sandbox)
 
-### Generate test data
+#### Generate test data
 ```
 create (p:Person {name: 'Jan Kowalski'})
 create (m:Movie {title: 'Chłopaki nie płaczą'})
@@ -38,14 +38,14 @@ create (p)-[w:WATCHED]->(m)
 return type(w)
 ```
 
-### Update
+#### Update
 ```
 match (p:Person {name: 'Jan Kowalski'})
 set p+={age: 21, gender: 'male'}
 return p
 ```
 
-### Delete
+#### Delete
 ```
 match (p:Person {name: 'Jan Kowalski'}), (m:Movie {title: 'Chłopaki nie płaczą'})
 detach delete p, m
