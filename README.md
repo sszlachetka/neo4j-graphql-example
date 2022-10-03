@@ -105,6 +105,8 @@ Apollo Server is an open-source, spec-compliant GraphQL server that's compatible
 
 By supplying the [Neo4j GraphQL Library]( https://neo4j.com/docs/graphql-manual/current) with a set of type definitions describing the shape of your graph data, it can generate an entire executable schema with all of the additional types needed to execute queries and mutations to interact with your Neo4j database.
 
+[Diagram](https://neo4j.com/developer/graphql/#_the_neo4j_graphql_library)
+
 ### Type definitions
 
 [gql](src/gql)
@@ -448,8 +450,33 @@ Configure `Neo4jGraphQLAuthJWTPlugin`
   });
 ```
 
-TODO: Sign up mutation
-TODO: Sign in mutation
+Sign up mutation
+```
+mutation SignUp($email: String!, $password: String!) {
+  signUp(email: $email, password: $password)
+}
+```
+Sign up variables
+```
+{
+  "email": "user1@my.com",
+  "password": "secret"
+}
+```
+
+Sign in mutation
+```
+mutation SignIn($email: String!, $password: String!) {
+  signIn(email: $email, password: $password)
+}
+```
+Sign in variables
+```
+{
+  "email": "user1@my.com",
+  "password": "secret"
+}
+```
 
 Define authorization rules. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
 ```
@@ -460,7 +487,19 @@ Other types of authorization rules can be found [here](https://neo4j.com/docs/gr
 
 `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function, See more details in [rateMovie.ts](src/gql/User/rateMovie.ts).
 
-TODO: rateMovie mutation
+Rate movie mutation
+```
+mutation RateMovie($movieTitle: String!, $rating: Int!) {
+  rateMovie(movieTitle: $movieTitle, rating: $rating)
+}
+```
+Rate movie variables
+```
+{
+  "movieTitle": "Twister",
+  "rating": 10
+}
+```
 
 Rated movies query
 ```
@@ -480,10 +519,7 @@ query Query {
 }
 ```
 
-TODO: clean this up
 ## Useful links
-Quick-start: https://neo4j.com/developer/graphql/
-Neo4j GraphQL Library features: https://neo4j.com/product/graphql-library/
-https://neo4j.com/developer-blog/create-a-typescript-apollo-server-and-live-database-with-unit-tests/
-https://www.apollographql.com/docs/apollo-server/testing/testing/
-https://neo4j.com/graphacademy/training-graphql-apis/00-graphql-apis-about-this-course/
+[Neo4j GraphQL Quickstart](https://neo4j.com/developer/graphql/#_the_neo4j_graphql_library)
+
+[Neo4j GraphQL Examples](https://github.com/neo4j/graphql/tree/master/examples)
