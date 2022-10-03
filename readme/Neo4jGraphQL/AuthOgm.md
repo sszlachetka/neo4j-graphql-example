@@ -27,7 +27,7 @@
 
     `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function, See more details in [rateMovie.ts](src/gql/User/rateMovie.ts).
 
-## Walk through User's [type definition](../../src/gql/User/index.ts).
+1. Walk through User's [type definition](../../src/gql/User/index.ts).
 
 ## Custom mutations with OGM
 
