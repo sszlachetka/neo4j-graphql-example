@@ -4,9 +4,9 @@
     1. You can start with either empty instance or Movies example
     1. Save generated password for later
 1. If you started with empty instance then query your data in Neo4j Browser
-    1. Run following command `:play movie-graph` to start Movie Graph built-in example. More details [here](https://neo4j.com/developer/example-data/#built-in-examples)
+    1. Run following command `:play movie-graph` to start Movie Graph built-in example. More details about built-in examples can be found [here](https://neo4j.com/developer/example-data/#built-in-examples).
     2. Move to the second step of the example and run Create data script to create the movie graph.
-1. Copy `.env.example` to `.env`. Set NEO4J_USER, NEO4J_PASSWORD and NEO4J_URI variables so that they point to you new New4j instance.
+1. Copy `.env.example` to `.env`. Set NEO4J_USER, NEO4J_PASSWORD and NEO4J_URI variables so that they point to you new Neo4j instance.
 1. Install packages & start the server
     ```
     npm install
@@ -14,7 +14,7 @@
     ```
     npm run dev
     ```
-1. Open [http://localhost:4000/](http://localhost:4000/) in you web browser and click `Query your server` button on Apollo Server welcome page. Run example query
+1. Open [http://localhost:4000](http://localhost:4000) in you web browser and click `Query your server` button on Apollo Server welcome page. Run example query.
     ```
     query Movies {
       movies {
@@ -53,7 +53,7 @@ Vocabulary:
 
 [Node or relationship properties](https://neo4j.com/docs/getting-started/current/cypher-intro/#cypher-properties)
 
-Sally likes Graphs
+> Sally likes Graphs
 ```
 (p:Person {name: "Sally"})-[rel:LIKES]->(g:Technology {type: "Graphs"})
 ```
