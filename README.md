@@ -45,4 +45,7 @@
 
 1. [Neo4j GraphQL quick start](https://neo4j.com/developer/graphql/)
 1. [Neo4j GraphQL examples](https://github.com/neo4j/graphql/tree/master/examples)
-1. Clean database statement `match (n) detach delete n`
+1. Cypher statement to delete **all records and relationships** 
+    ```
+    match (n) detach delete n
+    ```
