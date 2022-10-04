@@ -1,4 +1,4 @@
-# Neo4j GraphQL Library - the glue
+# Neo4j GraphQL Library - translation layer
 
 [Diagram](https://neo4j.com/developer/graphql/#_the_neo4j_graphql_library)
 
