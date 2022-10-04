@@ -3,27 +3,28 @@
 ## Restricting access to specific entities & fields
 
 1. Exclude specific entity operations with `@exclude` directive
-1. Configure `Neo4jGraphQLAuthJWTPlugin`
+2. Use JWT tokens
+    1. Configure `Neo4jGraphQLAuthJWTPlugin`
 
-    ```
-      const neoSchema = new Neo4jGraphQL({
-        typeDefs,
-        resolvers,
-        plugins: {
-          auth: new Neo4jGraphQLAuthJWTPlugin({
-            secret: config.NEO4J_GRAPHQL_JWT_SECRET,
-          }),
-        },
-      });
-    ```
-1. Define authorization rules for entities and fields. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
-    ```
-    extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
-    ```
+        ```
+          const neoSchema = new Neo4jGraphQL({
+            typeDefs,
+            resolvers,
+            plugins: {
+              auth: new Neo4jGraphQLAuthJWTPlugin({
+                secret: config.NEO4J_GRAPHQL_JWT_SECRET,
+              }),
+            },
+          });
+        ```
+    1. Define authorization rules for entities and fields. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
+        ```
+        extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
+        ```
 
-    Other types of authorization rules can be found [here](https://neo4j.com/docs/graphql-manual/current/auth/authorization/)
+        Other types of authorization rules can be found [here](https://neo4j.com/docs/graphql-manual/current/auth/authorization/)
 
-    `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function.
+        `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function.
 
 1. Walk through User's [type definition](../../src/gql/User/index.ts).
 
