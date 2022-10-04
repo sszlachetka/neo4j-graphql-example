@@ -38,7 +38,7 @@ Majority of examples below come from [Movies Sandbox](https://neo4j.com/sandbox/
     ```
     MATCH (p:Person) RETURN p limit 20
     ```
-1. Return all Person nodes who directed a movie that was released after 2010
+1. Return all Person nodes who directed a movie along with the movie
     ```
     MATCH (p:Person)-[d:DIRECTED]->(m:Movie) RETURN p,d,m
     ```
@@ -67,22 +67,22 @@ Majority of examples below come from [Movies Sandbox](https://neo4j.com/sandbox/
     ```
 1. Create or update node
     ```
-    MERGE (m:movie {title: 'Greyhound'})
+    MERGE (m:Movie {title: 'Greyhound'})
     ON MATCH SET m.lastUpdatedAt = timestamp()
-    ON CREATE SET m.released = "2020", m.createdAt = timestamp()
+    ON CREATE SET m.released = 2020, m.createdAt = timestamp()
     RETURN m
     ```
 1. Create multiple nodes and relationship
     ```
     CREATE (p:Person {name: 'Jan Kowalski'})
-    CREATE (m:Movie {title: 'Chłopaki nie płaczą'})
+    CREATE (m:Movie {title: 'Chłopaki nie płaczą', released: 2000})
     CREATE (p)-[w:WATCHED]->(m)
     RETURN type(w)
     ```
 1. Update node
     ```
     MATCH (p:Person {name: 'Jan Kowalski'})
-    SET p+={age: 21, gender: 'male'}
+    SET p+={city: "Warszawa", countryCode: "PL"}
     RETURN p
     ```
 1. Delete node
