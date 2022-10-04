@@ -90,6 +90,14 @@ Majority of examples below come from [Movies Sandbox](https://neo4j.com/sandbox/
     match (p:Person {name: 'Jan Kowalski'}), (m:Movie {title: 'Chłopaki nie płaczą'})
     detach delete p, m
     ```
+1. Finding all people who have co-acted with Tom Hanks in any movie
+    ```
+    MATCH (tom:Person {name: "Tom Hanks"})-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(p:Person) return p.name
+    ```
+1. Finding Movies and Actors that are 3 hops away from Kevin Bacon
+    ```
+    MATCH (p:Person {name: 'Kevin Bacon'})-[*1..3]-(hollywood) return DISTINCT p, hollywood
+    ```
 
 ## Useful links
 [Neo4j AuraDB](https://neo4j.com/cloud/aura-free/)
