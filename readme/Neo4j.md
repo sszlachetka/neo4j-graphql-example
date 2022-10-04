@@ -40,11 +40,11 @@ Majority of examples below come from [Movies Sandbox](https://neo4j.com/sandbox/
     ```
 1. Return all Person nodes who directed a movie that was released after 2010
     ```
-    MATCH (p:Person)-[d:DIRECTED]->(m:Movie) where m.released > 2010 RETURN p,d,m
+    MATCH (p:Person)-[d:DIRECTED]->(m:Movie) RETURN p,d,m
     ```
 1. Return specific properties of a node
     ```
-    MATCH (m:Movie) return m.title, m.released
+    MATCH (m:Movie) RETURN m.title, m.released
     ```
 1. Return nodes exactly matching provided pattern
     ```
@@ -56,7 +56,7 @@ Majority of examples below come from [Movies Sandbox](https://neo4j.com/sandbox/
     ```
 1. Create new node
     ```
-    Create (p:Person {name: 'John Doe'}) RETURN p
+    CREATE (p:Person {name: 'John Doe'}) RETURN p
     ```
 1. Create relationship
     ```
@@ -70,33 +70,33 @@ Majority of examples below come from [Movies Sandbox](https://neo4j.com/sandbox/
     MERGE (m:movie {title: 'Greyhound'})
     ON MATCH SET m.lastUpdatedAt = timestamp()
     ON CREATE SET m.released = "2020", m.createdAt = timestamp()
-    Return m
+    RETURN m
     ```
 1. Create multiple nodes and relationship
     ```
-    create (p:Person {name: 'Jan Kowalski'})
-    create (m:Movie {title: 'Chłopaki nie płaczą'})
-    create (p)-[w:WATCHED]->(m)
-    return type(w)
+    CREATE (p:Person {name: 'Jan Kowalski'})
+    CREATE (m:Movie {title: 'Chłopaki nie płaczą'})
+    CREATE (p)-[w:WATCHED]->(m)
+    RETURN type(w)
     ```
 1. Update node
     ```
-    match (p:Person {name: 'Jan Kowalski'})
-    set p+={age: 21, gender: 'male'}
-    return p
+    MATCH (p:Person {name: 'Jan Kowalski'})
+    SET p+={age: 21, gender: 'male'}
+    RETURN p
     ```
 1. Delete node
     ```
-    match (p:Person {name: 'Jan Kowalski'}), (m:Movie {title: 'Chłopaki nie płaczą'})
-    detach delete p, m
+    MATCH (p:Person {name: 'Jan Kowalski'}), (m:Movie {title: 'Chłopaki nie płaczą'})
+    DETACH DELETE p, m
     ```
 1. Finding all people who have co-acted with Tom Hanks in any movie
     ```
-    MATCH (tom:Person {name: "Tom Hanks"})-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(p:Person) return p.name
+    MATCH (tom:Person {name: "Tom Hanks"})-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(p:Person) RETURN p.name
     ```
 1. Finding Movies and Actors that are 3 hops away from Kevin Bacon
     ```
-    MATCH (p:Person {name: 'Kevin Bacon'})-[*1..3]-(hollywood) return DISTINCT p, hollywood
+    MATCH (p:Person {name: 'Kevin Bacon'})-[*1..3]-(hollywood) RETURN DISTINCT p, hollywood
     ```
 
 ## Useful links
