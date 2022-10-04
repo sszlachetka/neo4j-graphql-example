@@ -2,6 +2,7 @@
 
 ## Restricting access to specific entities & fields
 
+1. Exclude specific entity operations with `@exclude` directive
 1. Configure `Neo4jGraphQLAuthJWTPlugin`
 
     ```
@@ -15,9 +16,6 @@
         },
       });
     ```
-
-1. Exclude specific entity operations with `@exclude` directive
-
 1. Define authorization rules for entities and fields. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
     ```
     extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
@@ -25,11 +23,13 @@
 
     Other types of authorization rules can be found [here](https://neo4j.com/docs/graphql-manual/current/auth/authorization/)
 
-    `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function, See more details in [rateMovie.ts](src/gql/User/rateMovie.ts).
+    `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function.
 
 1. Walk through User's [type definition](../../src/gql/User/index.ts).
 
 ## Custom mutations with OGM
+
+[rateMovie.ts](../../src/gql/User/rateMovie.ts).
 
 ### Sign up mutation
 ```
