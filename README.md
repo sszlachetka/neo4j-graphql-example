@@ -15,7 +15,7 @@
     ```
     npm run dev
     ```
-1. Open [http://localhost:4000](http://localhost:4000) in your web browser and click `Query your server` button on Apollo Server welcome page. Run example query.
+1. Open [Apollo Server](http://localhost:4000) in your web browser and click `Query your server` button on Apollo Server welcome page. Run example query.
     ```
     query Movies {
       movies {

@@ -103,3 +103,23 @@ Variables
   }
 }
 ```
+
+## Delete
+
+```
+mutation DeletePeople($where: PersonWhere) {
+  deletePeople(where: $where) {
+    nodesDeleted
+    relationshipsDeleted
+  }
+}
+```
+
+Variables
+```
+{
+  "where": {
+    "name": "Cezary Pazura"
+  }
+}
+```
