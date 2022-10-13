@@ -1,4 +1,4 @@
-# Auth & OGM
+# Security
 
 ## Restricting access to specific entities & fields
 
@@ -27,10 +27,6 @@
         `@auth` directive cannot be used on custom resolvers, but JWT payload is available in the context object that is passed to resolver function.
 
 1. Walk through User's [type definition](../../src/gql/User/index.ts).
-
-## Custom mutations with OGM
-
-[rateMovie.ts](../../src/gql/User/rateMovie.ts).
 
 ### Sign up mutation
 ```

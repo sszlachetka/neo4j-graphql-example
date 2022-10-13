@@ -14,4 +14,5 @@ By supplying the [Neo4j GraphQL Library]( https://neo4j.com/docs/graphql-manual/
 1. [Offset-based pagination](OffsetBasedPagination.md)
 1. [Cursor-based pagination](CursorBasedPagination.md)
 1. [Custom resolvers](CustomResolvers.md)
-1. [Auth & OGM](AuthOgm.md)
+1. [Security](Security.md)
+1. [OGM](OGM.md)

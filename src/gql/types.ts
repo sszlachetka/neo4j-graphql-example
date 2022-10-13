@@ -1,8 +1,9 @@
 import { OGM } from '@neo4j/graphql-ogm';
 import { JWTPayload } from '../security/JWT';
+import { ModelMap } from './ogm-types';
 
 export type ServerContext = {
-  ogm: OGM;
+  ogm: OGM<ModelMap>;
   auth: {
     jwt: JWTPayload
   }

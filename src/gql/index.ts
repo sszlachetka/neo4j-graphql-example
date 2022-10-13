@@ -8,8 +8,9 @@ import * as Person from './Person';
 import * as User from './User';
 import * as config from '../config';
 import { Driver } from 'neo4j-driver';
+import { ModelMap } from './ogm-types';
 
-const typeDefs = [
+export const typeDefs = [
   ActedIn.typeDefs,
   Movie.typeDefs,
   Person.typeDefs,
@@ -22,7 +23,7 @@ const resolvers = {
 };
 
 export async function createServer(driver: Driver): Promise<ApolloServer> {
-  const ogm = new OGM({
+  const ogm = new OGM<ModelMap>({
     typeDefs,
     driver,
   });
