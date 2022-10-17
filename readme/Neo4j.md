@@ -8,7 +8,7 @@ It turns out that "relational" databases handle relationships poorly. In a graph
 
 Cypher is Neo4j’s graph query language that allows to store and retrieve data from the graph database.
 
-Vocabulary:
+Terminology:
 - Node - data entity
 - Node label - allow to specify certain types of entities to look for or create
 - Relationship - directed connection between two nodes
