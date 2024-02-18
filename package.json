@@ -33,12 +33,12 @@
   "dependencies": {
     "@neo4j/graphql": "~3.8.0",
     "@neo4j/graphql-ogm": "~3.8.0",
-    "@neo4j/graphql-plugin-auth": "~1.1.0",
+    "@neo4j/graphql-plugin-auth": "~2.2.0",
     "apollo-server": "~3.10.2",
     "crypto": "~1.0.1",
     "dotenv": "~16.0.2",
-    "graphql": "~16.6.0",
-    "jsonwebtoken": "~8.5.1",
+    "graphql": "~16.8.1",
+    "jsonwebtoken": "~9.0.2",
     "neo4j-driver": "~5.0.1"
   }
 }
