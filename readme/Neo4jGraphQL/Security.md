@@ -2,6 +2,9 @@
 
 ## Restricting access to specific entities & fields
 
+TODO: @exclude deprecated
+https://neo4j.com/docs/graphql/current/migration/
+
 1. Exclude specific entity operations with `@exclude` directive
 2. Use JWT tokens
     1. Configure `Neo4jGraphQLAuthJWTPlugin`
@@ -18,6 +21,9 @@
           });
         ```
     1. Define authorization rules for entities and fields. For instance, rule below always appends predicate to Cypher WHERE clause when User entity is queried.
+
+    TODO: in @neo4j/graphql 4.0.0 @auth has been deprecated https://neo4j.com/docs/graphql/current/migration/authorization/
+
         ```
         extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
         ```

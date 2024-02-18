@@ -8,7 +8,7 @@ export const typeDefs = gql`
     rating: Int!
   }
 
-  type User @exclude(operations: [CREATE, UPDATE, DELETE]) {
+  type User @mutation(operations: []) {
     id: ID! @id
     email: String!
     passwordHash: String! @private
@@ -19,7 +19,9 @@ export const typeDefs = gql`
       @relationship(type: "RATED", properties: "Rated", direction: OUT)
   }
 
-  extend type User @auth(rules: [{ where: { id: "$jwt.sub" } }])
+  extend type User @authorization(validate: [{ when: [BEFORE], where: { node: { id: "$jwt.sub" } } }]) {
+    id: ID!
+}
 
   type Mutation {
     signUp(email: String!, password: String!): String! # JWT

@@ -1,5 +1,8 @@
 # Custom resolvers
 
+TODO:@computed replaced with @customResolver(requires: ["firstName", "lastName"])
+https://neo4j.com/docs/graphql/current/migration/
+
 ```
   type Person {
     name: String!
