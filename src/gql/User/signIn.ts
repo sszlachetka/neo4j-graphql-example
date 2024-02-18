@@ -1,5 +1,5 @@
 import { createJWT } from '../../security/JWT';
-import { comparePassword } from '../../security/password';
+import { comparePassword } from '../../security/Password';
 import { ServerContext } from '../types';
 
 /**

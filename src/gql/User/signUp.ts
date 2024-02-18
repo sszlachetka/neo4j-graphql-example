@@ -1,5 +1,5 @@
 import { createJWT } from '../../security/JWT';
-import { hashPassword } from '../../security/password';
+import { hashPassword } from '../../security/Password';
 import { ServerContext } from '../types';
 
 /**
