@@ -5,12 +5,12 @@ export async function rateMovie(
   args: { movieTitle: string; rating: number },
   context: ServerContext
 ): Promise<string> {
-  const { jwtPayload } = context;
-  if (!jwtPayload) {
+  const { jwt } = context;
+  if (!jwt) {
     throw new Error('Unauthorized');
   }
 
-  const userId = jwtPayload.sub;
+  const userId = jwt.sub;
 
   const User = context.ogm.model('User');
   await User.update({

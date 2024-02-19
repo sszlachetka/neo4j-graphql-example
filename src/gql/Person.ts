@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server';
-import { Person } from './ogm-types';
+import { Integer } from 'neo4j-driver';
 
 export const typeDefs = gql`
   type Person {
@@ -14,12 +14,12 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Person: {
-    age: (source: Person) => {
+    age(source: any) {
       const { born } = source;
 
       if (!born) return;
 
-      return new Date().getUTCFullYear() - born;
+      return new Date().getUTCFullYear() - (born as Integer).toNumber();
     },
   },
 };

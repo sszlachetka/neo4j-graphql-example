@@ -9,6 +9,7 @@ import * as config from '../config';
 import { Driver } from 'neo4j-driver';
 import { ModelMap } from './ogm-types';
 import { decodeJWT } from '../security/JWT';
+import { ServerContext } from './types';
 
 export const typeDefs = [
   ActedIn.typeDefs,
@@ -27,7 +28,6 @@ export async function createServer(driver: Driver): Promise<ApolloServer> {
     typeDefs,
     driver,
   });
-  await ogm.init();
 
   const neoSchema = new Neo4jGraphQL({
     driver,
@@ -41,20 +41,21 @@ export async function createServer(driver: Driver): Promise<ApolloServer> {
   });
 
   const schema = await neoSchema.getSchema();
+  await ogm.init();
 
   const server: ApolloServer = new ApolloServer({
     schema,
-    context: async ({ req }) => {
-      const jwt = req.headers.authorization;
-      let jwtPayload;
-      if (jwt) {
-        jwtPayload = decodeJWT(jwt.split(' ')[1]);
+    context: async ({ req }): Promise<ServerContext> => {
+      const authorizationHeader = req?.headers?.authorization;
+      let jwt;
+      if (authorizationHeader) {
+        jwt = decodeJWT(authorizationHeader.split(' ')[1]);
       }
 
       return {
         ogm,
-        token: jwt,
-        jwtPayload,
+        token: authorizationHeader,
+        jwt,
       };
     },
   });

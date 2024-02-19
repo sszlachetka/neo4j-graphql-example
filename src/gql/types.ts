@@ -4,5 +4,6 @@ import { ModelMap } from './ogm-types';
 
 export type ServerContext = {
   ogm: OGM<ModelMap>;
-  jwtPayload: JWTPayload;
+  token: string;
+  jwt?: JWTPayload;
 };
