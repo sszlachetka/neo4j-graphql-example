@@ -19,7 +19,7 @@ export const typeDefs = gql`
       @relationship(type: "RATED", properties: "Rated", direction: OUT)
   }
 
-  extend type User @authorization(validate: [{ when: [BEFORE], where: { node: { id: "$jwt.sub" } } }]) {
+  extend type User @authorization(filter: [{ where: { node: { id: "$jwt.sub" } } }]) {
     id: ID!
 }
 

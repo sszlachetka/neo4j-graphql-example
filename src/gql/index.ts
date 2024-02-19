@@ -8,7 +8,7 @@ import * as User from './User';
 import * as config from '../config';
 import { Driver } from 'neo4j-driver';
 import { ModelMap } from './ogm-types';
-import { decodeJWT } from '../security/JWT';
+import { JWTPayload, decodeJWT } from '../security/JWT';
 import { ServerContext } from './types';
 
 export const typeDefs = [
@@ -46,19 +46,27 @@ export async function createServer(driver: Driver): Promise<ApolloServer> {
   const server: ApolloServer = new ApolloServer({
     schema,
     context: async ({ req }): Promise<ServerContext> => {
-      const authorizationHeader = req?.headers?.authorization;
-      let jwt;
-      if (authorizationHeader) {
-        jwt = decodeJWT(authorizationHeader.split(' ')[1]);
-      }
+      const authHeader = req?.headers?.authorization;
+
+      const token = typeof authHeader === 'string' ? authHeader : null;
+      const jwtPayload = token ? parseJWT(token) : null;
 
       return {
         ogm,
-        token: authorizationHeader,
-        jwt,
+        token,
+        jwtPayload,
       };
     },
   });
 
   return server;
+}
+
+function parseJWT(authHeader: string): JWTPayload | null {
+  const [authSchema, jwtToken] = authHeader.split(' ');
+  if (authSchema === 'Bearer' && typeof jwtToken === 'string') {
+    return decodeJWT(jwtToken);
+  }
+
+  return null;
 }
