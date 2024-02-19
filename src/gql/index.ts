@@ -25,8 +25,9 @@ const resolvers = {
 
 export async function createServer(driver: Driver): Promise<ApolloServer> {
   const ogm = new OGM<ModelMap>({
-    typeDefs,
     driver,
+    typeDefs,
+    resolvers,
   });
 
   const neoSchema = new Neo4jGraphQL({
